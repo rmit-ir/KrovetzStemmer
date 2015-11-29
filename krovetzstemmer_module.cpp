@@ -36,24 +36,40 @@ KrovetzStemmer_dealloc(KrovetzStemmer* self)
 static PyObject*
 KrovetzStemmer_stem(KrovetzStemmer* self, PyObject* args) {
     PyObject* term;
-
     if (!PyArg_ParseTuple(args, "O", &term)) return NULL;
 
-    if (!PyString_Check(term)) {
+    int is_unicode = PyUnicode_Check(term);
+
+    PyObject* stem;
+    if (is_unicode) 
+	stem = PyUnicode_AsUTF8String(term); 
+    else if (PyString_Check(term))
+	stem = PyString_FromString(PyString_AS_STRING(term));
+    else {
 	PyErr_BadArgument();
 	return NULL;
     }
 
-    PyObject* stem = PyString_FromString(PyString_AsString(term));
+    // PyObject* stem = PyString_FromString(PyString_AsString(term));
     int processed = self->stemmer->kstem_stem_tobuffer(
 	PyString_AS_STRING(stem), self->buf);
-
     if (processed > 0) {
 	Py_DECREF(stem);
-	return PyString_FromStringAndSize(self->buf, processed - 1);
+
+	if (is_unicode) 
+	    return PyUnicode_DecodeUTF8(self->buf, processed - 1, NULL);
+	else
+	    return PyString_FromStringAndSize(self->buf, processed - 1);
     }
-    else
-	return stem;
+    else {
+	if (is_unicode) {
+	    PyObject* unicode = PyUnicode_FromString(PyString_AS_STRING(stem));
+	    Py_DECREF(stem);
+	    return unicode;
+	}
+	else 
+	    return stem;
+    }
 }
 
 static PyMethodDef KrovetzStemmer_methods[] = {
