@@ -8,10 +8,15 @@ for key, value in cfg_vars.items():
 
 setup(
     name="KrovetzStemmer",
-    version="1.0",
+    version="0.1",
+    description="Python binding to the C++ KrovetzStemmer package",
+    author="Ruey-Cheng Chen",
+    url="https://github.com/rueycheng/KrovetzStemmer",
     ext_modules=[
-        Extension("krovetzstemmer",
-                  sources=["krovetzstemmer_module.cpp",
-                           "KrovetzStemmer.cpp"])
+        Extension(
+            "krovetzstemmer",
+            sources=["krovetzstemmer_module.cpp",
+                     "KrovetzStemmer.cpp"]
+        )
     ]
 )
