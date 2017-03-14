@@ -16,8 +16,10 @@
 #define _KROVETZ_STEMMER_H_
 #include <iostream>
 #include <cstring>
-#ifdef WIN32
+#if defined(_WIN32)
 #include <hash_map>
+#elif defined(__clang__)
+#include <tr1/unordered_map>
 #else
 // Move this somewhere
 #ifndef HAVE_GCC_VERSION
@@ -124,7 +126,7 @@ namespace stem {
     void nce_endings();
     // maint.
     void loadTables();
-#ifdef WIN32
+#if defined(_WIN32)
     struct ltstr {
       bool operator()(const char* s1, const char* s2) const {
         return strcmp(s1, s2) < 0;
@@ -133,6 +135,13 @@ namespace stem {
     //studio 7 hash_map provides hash_compare, rather than hash
     // needing an < predicate, rather than an == predicate.
     typedef stdext::hash_map<const char *, dictEntry, stdext::hash_compare<const char *, ltstr> > dictTable;
+#elif defined(__clang__)
+    struct eqstr {
+      bool operator()(const char* s1, const char* s2) const {
+        return strcmp(s1, s2) == 0;
+      }
+    };
+    typedef std::tr1::unordered_map<const char *, dictEntry, std::tr1::hash<std::string>, eqstr> dictTable;
 #else
     struct eqstr {
       bool operator()(const char* s1, const char* s2) const {
