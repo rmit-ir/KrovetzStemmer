@@ -23,3 +23,7 @@ The usage is similar to the python package `porterstemmer`.
     stemmer = Stemmer()
     stemmer.stem('utilities')  # got: 'utility'
     stemmer.stem(u'utilities')  # got: u'utility'
+
+## Contributors ##
+
+* Ruey-Cheng Chen
