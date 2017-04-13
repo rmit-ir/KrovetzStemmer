@@ -3,6 +3,8 @@
 Python binding to the C++ KrovetzStemmer package, originally distributed with
 the Lemur toolkit.
 
+The extension is compatible with both python 2.6 and python 3.x.
+
 
 ## Installation ##
 
