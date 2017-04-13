@@ -8,7 +8,7 @@ for key, value in cfg_vars.items():
 
 setup(
     name="KrovetzStemmer",
-    version="0.4",
+    version="0.5",
     description="Python binding to the C++ KrovetzStemmer package",
     author="Ruey-Cheng Chen",
     author_email="rueycheng@gmail.com",
