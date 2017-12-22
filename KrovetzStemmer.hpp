@@ -16,7 +16,7 @@
 #define _KROVETZ_STEMMER_H_
 #include <iostream>
 #include <cstring>
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 #include <hash_map>
 #elif defined(__clang__)
