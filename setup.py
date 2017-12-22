@@ -16,7 +16,6 @@ setup(
     ext_modules=[
         Extension(
             "krovetzstemmer",
-            extra_compile_args=['-stdlib=libstdc++'],
             sources=["krovetzstemmer_module.cpp", "KrovetzStemmer.cpp"]
         )
     ]

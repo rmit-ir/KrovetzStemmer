@@ -20,7 +20,7 @@
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 #include <hash_map>
 #elif defined(__clang__)
-#include <tr1/unordered_map>
+#include <unordered_map>
 #else
 // Move this somewhere
 #ifndef HAVE_GCC_VERSION
@@ -142,7 +142,7 @@ namespace stem {
         return strcmp(s1, s2) == 0;
       }
     };
-    typedef std::tr1::unordered_map<const char *, dictEntry, std::tr1::hash<std::string>, eqstr> dictTable;
+    typedef std::unordered_map<const char *, dictEntry, std::hash<std::string>, eqstr> dictTable;
 #else
     struct eqstr {
       bool operator()(const char* s1, const char* s2) const {
