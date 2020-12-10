@@ -29,3 +29,4 @@ The usage is similar to the python package `porterstemmer`.
 ## Contributors ##
 
 * Ruey-Cheng Chen
+* Reza Gharibi
