@@ -1,1 +1,1 @@
-include *.cpp *.hpp
+include *.cpp *.hpp README.md
