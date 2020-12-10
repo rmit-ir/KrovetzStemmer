@@ -10,7 +10,7 @@ long_description = open('README.md').read()
 
 setup(
     name='KrovetzStemmer',
-    version='0.7',
+    version='0.8',
     description='Python binding to the C++ KrovetzStemmer package',
     long_description=long_description,
     author='Ruey-Cheng Chen',
